@@ -1,0 +1,216 @@
+<?
+//echo $uniduser;
+include('conecta.php');
+//echo $_GET["user"];
+//echo $user;
+//echo $puser;
+if ($user!=""){  
+				$sql1 = "SELECT * from user where user='".$user."' and pass='".$puser."';";
+				$result1 = odbc_exec($connect , $sql1);
+				$conta1=  odbc_fetch_row($result1);
+				
+				if ($conta1===0){
+					echo"<script>alert('SENHA INVÁLIDA: indexnew');window.open('index.php','_top');</script>";} 
+						else {  $sql = "SELECT * from user_menu where user='".$user."'";
+								$result = odbc_exec($connect, $sql);}
+								
+								} 
+								else {/*echo "nada do menu";*/}
+
+
+?>
+
+<html>
+<head>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            var speakBtn = document.querySelector('#speakBtn');
+           
+		   if (window.SpeechRecognition || window.webkitSpeechRecognition) {// testa o navega 
+                var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition; // captura a voz
+                var recognition = new SpeechRecognition();
+                
+				// inicia reconhecimento
+                speakBtn.addEventListener('click', function(e) {recognition.start();}, false); 
+                // resultado 
+				
+				recognition.onend = alert('onend');
+				
+                recognition.addEventListener('result', function(e) {
+					console.log(e);
+                    var result = e.results[0][0].transcript;
+                    
+					console.log(result);
+                    //if (result.toLowerCase() === 'luz') {document.body.classList.toggle('luz-apagada');} 							
+redige.innerHTML=redige.innerHTML+'\n'+result;
+
+
+var counter = 0;
+var interval = setInterval(function(){ counter++; },1000)
+
+recognition.onend = function() {  if(counter <= 5 * 60){ recognition.start(); /*alert('ouvindo');*/}  else   clearInterval(interval) }
+
+// recognition.onerror = alert('PRONTO'); AO TERMINAR  DE ESCUTAR
+
+/*
+switch (result.toLowerCase()) {
+	case 'ir para menu':
+    alert('menu');
+    break
+ 
+ default:
+
+    speakBtn.value=result;
+	//verbuscador.style.display='block';
+	speakBtn.value=result;
+	//buscador.value=result;
+//	cmat.submit();
+	var name=confirm("ENTENDI: \n"+result+" \nESTÁ CORRETO?"); if (name==true) {falares.innerHTML=result;}else{falares.innerHTML=" :-( vou tentar melhorar...";return false;}
+
+
+}*/
+					//alert('nenhuma das anteriores');
+					// window.location.href = 'http://' + result;
+
+}, false);
+} else {alert('Este navegador não suporta esta funcionalidade ainda!');}
+
+}, false);
+		
+				
+function fday(){
+//var name1=prompt("FRASE DO DIA:");
+//if (name1){falares.innerHTML='"'+name1+'"';}
+//else{ falares.innerHTML="&nbsp;";return false;}
+}
+		
+</script>
+
+<script src="f12.js"></script>
+
+
+<title>.. ALCANCE ..</title>
+<META HTTP-EQUIV="Expires" CONTENT="0">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache,must-revalidate">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Set-Cookie"CONTENT="cookievalue=xxx;expires=Friday, 31-Dec-99 23:59:59 GMT; path="/"">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<STYLE>
+body {
+margin:0;	
+
+background-size: 100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+}
+
+table{
+color: white;
+
+
+}
+
+input {
+font: 32px arial;
+border-radius: 50px;
+box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+rgba(0, 0, 0, 0.09) 0px 8px 4px, 
+rgba(0, 0, 0, 0.09) 0px 16px 8px,
+
+}
+
+h1 { 
+color: white;
+font:  72px courier;
+}
+
+#logo {
+	 font: 32px arial;
+	   border-radius: 50px;
+	   transition: 1.0s;
+      }
+	  
+	  a {
+	cursor: hand;
+	text-decoration:none;
+	color: white;}
+
+
+.container {
+transition: 1.0s;
+opacity: 0.1;
+ }	 
+
+.container:hover  {
+transition: 1.0s;
+opacity: 0.9;
+ }	
+
+</style>
+
+ <body oncontextmenu="return false;" onload="container.style.opacity='0.9';speakBtn.focus();return fday();">  
+<textarea id="redige"></textarea>
+
+  <form action="index_new_res.php" name="cmat" id="cmat" method="post" target="checamat">
+ 	<input type="hidden" name="op" value="<? echo $user;?>"/>
+	<input type="hidden" name="user" value="<? echo $user;?>"/>
+	<input type="hidden" name="levauser" value="<? echo $user;?>"/>
+	<input type="hidden" name="deptouser" value="<? echo $deptouser;?>"/>	
+	<input type="hidden" name="uniduser" value="<? echo $uniduser;?>"/>
+	<input type="hidden" name="juris" value="<? echo $juris;?>"/>	
+	<input type="hidden" name="buscador" id="buscador" value=""> 
+   	
+</form>
+
+
+<div id="container" class="container">
+
+<TABLE WIDTH="100%" BORDER="0" height="100%" align="center">
+
+<TR>
+
+<td valign="middle" align="center">
+
+
+<a onclick="window.open('https://www.google.com/search?q=o que se comemora dia <?  $dia = date('d/m'); echo $dia;?>','_selfs')" target="_self">
+<img src="favicon.png" title="TOGETHER WE'LL BE MORE THAN STRONGER" width="200" height="200"></img>
+</a>
+<input type="hidden" id="fdday" value="">
+<DIV id="falares">&nbsp;</DIV>
+<br><BR>
+
+<!--&#129658; &#129657;  &#129463; &#128452;//-->
+<input type="text" class="brilha" placeholder="SISTEMA ALCANCE &#128269; &#128483; " id='speakBtn' onmousemove="this.focus();" name="busca" value="" size="35"
+ required="required" title="Inicie a busca digitando OU falando o termo." 
+ onclick="logo.style.opacity='1'" onkeyup="verbuscador.style.display='block';buscador.value=this.value;cmat.submit();" onblur="this.value='';" ondblclick="verbuscador.style.display='none'">
+
+
+<div name="verbuscador" id="verbuscador" onblur="verbuscador.style.display='none'" Xonmouseout="verbuscador.style.display='none'"
+style="display: none; border-radius:10px;position: absolute; z-index:0; width: 100%;">
+<table border="0" width="30%" style="border-radius:10px;box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+<tr><td align="center">
+<iframe src="" width="100%" height="300" name="checamat" frameborder=0 style="border-radius:10px;"></iframe>
+</td>
+</tr>
+</table>
+</div>
+
+<div>
+
+<iframe src="index_new_free.php" width="100%" height="300" name="checamat" frameborder=0 scrolling="no"></iframe>
+</div>
+
+
+ </td>
+ </tr>
+</TABLE>
+</div>
+</body>
+</html>
+
+<?php     
+odbc_close($connect);
+?>
